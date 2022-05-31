@@ -2,12 +2,12 @@ import { Button, Paper } from "@material-ui/core";
 import { useEffect, useMemo } from "react";
 import useRPCData from "../../hooks/useRPCData";
 import { useAccount, useRpcStore } from "../../stores";
-import { addToNetwork, renderProviderText } from "../../utils";
+import { addToNetwork, renderProviderText, getFaucets } from "../../utils";
 import classes from "./index.module.css";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import { useTranslation } from "next-i18next";
 
-export default function RPCList({ chain }) {
+export default function AdditionalInfo({ chain }) {
   const chains = useRPCData(chain.rpc);
 
   const data = useMemo(() => {
@@ -81,9 +81,31 @@ export default function RPCList({ chain }) {
     window.localStorage.getItem("yearn.finance-dark-mode") === "dark";
 
   const isEthMainnet = chain?.name === "Ethereum Mainnet";
-
+  const faucets = getFaucets(chain.chainId);
   return (
     <Paper elevation={1} className={classes.disclosure}>
+      {faucets.length > 0 && <div class={classes.faucet}>
+        <Button onClick={() => window.open(faucets[0], "_blank")}variant="outlined" color="primary">Get tokens from faucet</Button>
+        <br />
+        <br />
+        <table
+          className={classes.table}
+          style={{
+            "--border-color": darkMode
+              ? "hsl(0deg 0% 39% / 33%)"
+              : "hsl(0deg 0% 17% / 4%)",
+          }}        
+        >
+          <caption>{`${chain.name} Available Faucets`}</caption>
+          <tr>
+            <th>Faucet Domain</th>
+          </tr>
+          {faucets.map((item, index)=> (
+            <tr><td>{item.split("/")[2]}</td><Button onClick={() => window.open(item, "_blank")}>Open Faucet</Button></tr>
+          ))}
+        </table>
+      </div>}
+      <br /><br />
       <table
         className={classes.table}
         style={{
@@ -92,6 +114,8 @@ export default function RPCList({ chain }) {
             : "hsl(0deg 0% 17% / 4%)",
         }}
       >
+
+        
         <caption>{`${chain.name} RPC URL List`}</caption>
         <thead>
           <tr>

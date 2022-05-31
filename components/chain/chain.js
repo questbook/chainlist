@@ -11,8 +11,8 @@ import stores, { useAccount, useChain } from "../../stores/index.js";
 import { ACCOUNT_CONFIGURED } from "../../stores/constants";
 import Image from "next/image";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import RPCList from "../RPCList";
-import { addToNetwork, renderProviderText } from "../../utils";
+import AdditionalInfo from "../Additionalnfo";
+import { addToNetwork, renderProviderText, getFaucet } from "../../utils";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
@@ -157,7 +157,7 @@ export default function Chain({ chain, buttonOnly }) {
           </ExpandButton>
         )}
       </Paper>
-      {showAddlInfo && <RPCList chain={chain} />}
+      {showAddlInfo && <AdditionalInfo chain={chain} />}
     </>
   );
 }

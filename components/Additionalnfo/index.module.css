@@ -54,6 +54,11 @@
   text-decoration: underline;
 }
 
+.faucet {
+  text-align: center;
+  margin: 12px;
+}
+
 @keyframes loading {
   0% {
     background-position: -100px;

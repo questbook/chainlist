@@ -5,7 +5,7 @@ import { withTheme } from "@material-ui/core/styles";
 import { populateChain, fetcher } from "../../utils";
 import AddNetwork from "../../components/chain";
 import Layout from "../../components/Layout";
-import RPCList from "../../components/RPCList";
+import AdditionalInfo from "../../components/Additionalnfo";
 import classes from "./index.module.css";
 import Image from "next/image";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -108,7 +108,7 @@ function Chain({ changeTheme, theme, chain }) {
 
           <AddNetwork chain={chain} buttonOnly />
         </Paper>
-        <RPCList chain={chain} />
+        <AdditionalInfo chain={chain} />
       </Layout>
     </>
   );

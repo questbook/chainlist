@@ -4,6 +4,7 @@ import stores from "../stores";
 import { ERROR, TRY_CONNECT_WALLET } from "../stores/constants/constants";
 import allExtraRpcs from "../constants/extraRpcs.json";
 import chainIds from "../constants/chainIds.js";
+import faucets from "../constants/faucets.json";
 
 // todo: get navigator declared somehow? probably an issue with using nextjs
 // function getLang() {
@@ -169,4 +170,10 @@ export function populateChain(chain, chainTvls) {
         };
   }
   return chain;
+}
+
+export function getFaucets(chainId) {
+  if(chainId in faucets)
+    return faucets[chainId];
+  return []
 }
