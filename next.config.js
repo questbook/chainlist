@@ -6,5 +6,10 @@ module.exports = {
     images: {
       domains: ['defillama.com'],
     },
+    plugins: [
+      new webpack.IgnorePlugin({
+          resourceRegExp: /^electron$/
+      }),
+    ]
   }
   
